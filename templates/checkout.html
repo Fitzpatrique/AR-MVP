@@ -1,0 +1,46 @@
+{% extends 'base.html' %}  
+
+{% block head %} 
+    
+{% endblock %}
+ 
+{% block body %}
+
+    <h1>Confirm your order</h1>
+    <h3>Proceed to payment</h3>
+
+	<form>
+		<p>Delivery Address: {{user['delivery_address']}} </p>
+		<p>Phone Number: {{user['phone']}} </p>
+	</form>
+
+	<div id="cartItems">
+	<h2>The items you are ordering</h2>
+	<div id="tableItems">
+		{% for row in item %}
+		<div>
+			<hr id="seperator">
+			<div id="itemName">
+				<span id="itemNameTag">{{row['producttitle']}}</span><br>
+			</div>
+			<div id="itemPrice">
+				₦{{row['totalprice']}}
+			</div>
+			<div id="itemPrice">
+				No. of items: {{row['unit']}}
+			</div>
+		</div>
+		{% endfor %}
+		<hr id="seperator">
+		<div id="total">
+			<span id="subtotal">Your total order size is</span> : ₦{{totalprice}}
+			<span if="deliverydate"></span>
+		</div>
+		<div><a href="/">Return to Home Page</div>
+	</div>
+    </div>
+
+    <a href="/payment/page"><button>Confirm Payment</button></a>
+
+
+{% endblock %} 

@@ -1,0 +1,37 @@
+{% extends 'admin_home.html' %}  
+
+{% block head %} 
+    
+{% endblock %}
+ 
+{% block body %} 
+            
+            <h2>Products</h2>
+
+            
+            <img src="{{url_for('static', filename='upload/'+data[7])}}" id="image" width=100px height=100px/><br>
+
+            <form action="/updateProduct" method="POST" enctype="multipart/form-data">
+                <input type="text" name="productId" value={{data[0]}} hidden>
+                <p>Product Name<input type="text" name="name" value={{data[1]}} ></p>
+                <p>Price: <input type="text" name="price" value={{data[2]}} ></p>
+                <p>Compared Price: <input type="text" name="compared_price" value={{data[3]}} ></p>
+                <p>Vendor: <input type="text" name="vendor" value={{data[4]}} ></p>
+                <p>Tags: <input type="text" name="tags" value={{data[5]}} ></p>
+                <p>Description<input type="text" name="description" value={{data[6]}} ></p>
+                <p>Image <input type="file" name="image"></p>
+                <p>Stock: <input type="number" name="stock" value={{data[8]}} ></p>
+                Category: <select name="categoryId">
+                    <option value={{categoryId}}>{{category_name}}</option>
+                    {% for row in categories %}
+                        {% if row[0] != categoryId %}
+                            <option value="{{row[0]}}">{{row[1]}}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select><br>
+                <input type="submit" value="Save">
+            </form>
+
+            <a href="/admin">Back to admin</a>
+
+{% endblock %}

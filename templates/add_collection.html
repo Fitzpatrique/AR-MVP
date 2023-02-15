@@ -1,0 +1,26 @@
+{% extends 'admin_home.html' %}  
+
+{% block head %} 
+    
+{% endblock %}
+ 
+{% block body %}
+            <a href="/add/category">Add Categories</a>
+
+
+
+            <h2>Product Category</h2>
+            <div id="tableItems">
+                {% for row in data[0] %}
+                <div>
+                    <div>
+                        <img src="{{url_for('static', filename='upload/'+row[2])}}" id="image" width=100px height=100px/><span><a href="{{ url_for('editCategory',category_name=row[1],categoryId=row[0]) }}">{{row[1]}}</a></span>
+                        
+                        <a href="/removeCategory?categoryId={{row[0]}}">Remove</a>
+                    </div>
+
+                </div>
+                {% endfor %}
+
+
+{% endblock %}

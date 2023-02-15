@@ -1,0 +1,22 @@
+{% extends 'base.html' %}  
+
+{% block head %} 
+    
+{% endblock %}
+ 
+{% block body %}
+    
+<div class="desktop category">
+    <ul class="category-text">
+        {% for row in item %}
+        <li><a href="{{ url_for('collectionPage',collectiontitle=row['collectiontitle']) }}" class="text">{{row['collectiontitle']}}</a></li>
+        {% endfor %}
+    </ul>
+
+</div>
+
+<script type="text/javascript">
+    console.log({{item}})
+</script>
+
+{% endblock %}

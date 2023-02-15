@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="utf-8">
+            <link rel="stylesheet" type= "text/css" href="{{ url_for('static', filename = 'css/admin.css')}}"/>
+            <link rel="icon" type="image/jpg" href="{{ url_for('static', filename = 'image/twice new.jpg')}}" > 
+            <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+            <!--link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}"-->
+            <title> Skill Up With Kahdsole </title>
+            <meta name = "description" content = "Looks so good they would think it's new">
+            <meta name="keywords" content="thrift,online store,store,marketplace,fashion,fashion store">
+            <script type="text/javascript" src="{{ url_for('static', filename = 'js/validateForm.js') }}"></script>
+        </head>
+        <body>
+
+            <a href="/update/vendor"><p>View profile</p></a>
+            <a href="/display/vendor/order">Orders</a>
+            <a href="/display/vendor/product">Products</a>
+
+            <h2>Add items</h2>
+            <form action="/create/product" method="POST" enctype="multipart/form-data">
+                Product Name: <input type="text" name="producttitle" required><br>
+                Price: <input type="text" name="price" required><br>
+                Compared Price: <input type="text" name="compared_price"><br>
+                Description: <textarea name="description" rows=3 cols="40"></textarea><br>
+                
+                Image: <input type="file" name="image" required><br>
+                3D Model File: <input type="file" name="model_src"><br>
+                3D IOS Model File: <input type="file" name="model_ios_src"><br>
+                Size: small<input type="checkbox" name="size" value="small">
+                medium<input type="checkbox" name="size" value="medium" >
+                big<input type="checkbox" name="size" value="big" ><br>
+                Stock: <input type="number" name="stock" required><br>
+                Category: <select name="categorytitle" required>
+                    <option value="">-- SELECT OPTION --</option>
+                    {% for row in category_item %}
+                        <option value="{{row[0]}}">{{row[0]}}</option>
+                    {% endfor %}
+                </select><br>
+                <input type="submit">
+            </form>
+
+        </body>
+    </html>

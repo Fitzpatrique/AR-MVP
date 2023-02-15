@@ -1,0 +1,22 @@
+{% extends 'admin_home.html' %}  
+
+{% block head %} 
+    
+{% endblock %}
+ 
+{% block body %} 
+            <h2>Product Category</h2>
+
+            
+            <img src="{{url_for('static', filename='upload/'+data1[2])}}" id="image" width=100px height=100px/><br>
+
+            <form action="/updateCategory" method="POST" enctype="multipart/form-data">
+                <input type="text" name="categoryId" value={{data1[0]}} hidden>
+                <p>Category Name<input type="text" name="name" value={{data1[1]}} ></p>
+                <p>Image <input type="file" name="image"></p>
+                <input type="submit" value="Save">
+            </form>
+
+            <a href="/admin">Back to admin</a>
+
+{% endblock %}

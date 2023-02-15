@@ -1,0 +1,21 @@
+{% extends 'base.html' %}  
+
+{% block head %} 
+    
+{% endblock %}
+ 
+{% block body %}
+
+    <div>
+        <h2>Showing all products of {{category}} Category :</h2>
+
+        <!--h3>{{data}}</h3-->
+
+        
+        {% for row in item %}
+
+        <a href="{{ url_for('productPage',collectiontitle=collection,categorytitle=category,producttitle=row['producttitle']) }}">{{ row['producttitle'] }}</a><br>
+
+        {% endfor %}
+    </div>
+{% endblock %}

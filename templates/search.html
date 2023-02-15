@@ -1,0 +1,57 @@
+{% extends 'base.html' %}  
+
+{% block head %} 
+    
+{% endblock %}
+ 
+{% block body %}
+
+    {% if data == '' and categoryData == '' %}
+
+    <form action="{{url_for('search')}}" method="POST">
+        <input id="searchBox" type="text" name="searchQuery">
+        <input id="searchButton" type="submit" value="Search">
+    </form>
+
+    {% endif %}
+
+    {% if data != '' and categoryData != '' %}
+
+    <h3>Your search for "{{search}}" revealed the following:</h3>
+
+
+    <form action="/searchProduct" method="POST">
+        <input id="searchBox" type="text" name="searchQuery">
+        <input id="searchButton" type="submit" value="Search">
+    </form>
+
+        {% for category in categoryData %}
+            
+            {% for itemData in data %}
+
+                {% if itemData[6] == category[0] %}
+
+                    <a href="{{ url_for('productDescription',category_name=category[1],product_name=itemData[1],productId=itemData[0]) }}">
+                        <div>
+                            <div>
+                                <img src="{{url_for('static',filename='upload/'+itemData[5])}}" width="100px" height="100px">
+                            </div>
+
+                            <div>
+                                <span>{{itemData[1]}}</span>
+                                <span>{{itemData[2]}}</span>
+                                <span>{{itemData[3]}}</span>
+                                <span>{{itemData[4]}}</span>
+                            </div>
+                        </div>
+                    </a><br>
+
+                {% endif %}
+
+            {% endfor %}
+
+        {% endfor %}
+
+    {% endif %}
+
+{% endblock %}
