@@ -1,0 +1,38 @@
+{% extends 'base.html' %}  
+
+{% block head %} 
+    
+{% endblock %}
+ 
+{% block body %}
+
+
+<img src="{{url_for('static', filename='uploads/'+item['image'])}}" id="image" width=100px height=100px/><br>
+
+<form action="/addToCart" method="POST">
+
+    <p>Product Name<input type="text" name="producttitle" value="{{item['producttitle']}}" readonly="readonly"></p>
+    <input type="text" name="image" value="{{item['image']}}" hidden>
+    <p>Price: <input type="text" name="price" value="{{item['price']}}" readonly="readonly"></p>
+    <p>Compared Price: <input type="text" name="compared_price" value="{{item['compared_price']}}" readonly="readonly"></p>
+    <p>Vendor: <input type="text" name="vendor" value="{{vendor['firstname']}}" readonly="readonly"></p>
+    <p>No. of items: <input type="number" value="1" name="unit"></p>
+    <p>Size: 
+        <select  name="size" required>
+        {% for row in item['size'] %}
+        <option value="{{row}}">{{row}}</option>
+        {% endfor %}
+
+    </select> </p>
+
+    
+    
+
+
+    <input type="submit" value="Add to Cart">
+</form>
+
+
+
+
+{% endblock %}

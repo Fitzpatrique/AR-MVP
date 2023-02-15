@@ -1,0 +1,26 @@
+{% extends 'base.html' %}  
+
+{% block head %} 
+    
+{% endblock %}
+ 
+{% block body %}
+
+    <div class="display">
+        <h1>{{item[0]}}</h1>
+        
+        <h2>Edit profile</h2>
+        <form action="/updateProfile" method="POST">
+            <p>Email:<input type="email" name="email" value="{{item[0]['email']}}" readonly="readonly"></p>
+            <p>First name:<input type="text" name="username" value="{{item[0]['firstname']}}" maxlength='256'></p>
+            <p>Last name:<input type="text" name="username" value="{{item[0]['lastname']}}" maxlength='256'></p>
+            <p>Delivery Address: <input type="text" name="delivery_address" value="{{item[0]['delivery_address']}}" autocomplete="off"></p>
+            <p>Newsletter Subscription: Yes <input type="radio" name="subscription_status" value='Yes'> No<input type="radio" name="subscription_status" value='No'></p>
+            <p>City: <input type="text" name="city" value="{{item[0]['city']}}"></p>
+            <p>State: <input type="text" name="state" value="{{item[0]['state']}}"></p>
+            <p>Country: <input type="text" name="country" value="{{item[0]['country']}}"></p>
+            <p>Phone Number: <input type="text" name="phone" value="{{item[0]['phone']}}"></p>
+            <input type="submit" value="Save">
+        </form>
+    </div>
+{% endblock %}

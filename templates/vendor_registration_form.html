@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="utf-8">
+            <link rel="stylesheet" type= "text/css" href="{{ url_for('static', filename = 'css/style.css')}}"/>
+            <link rel="stylesheet" type= "text/css" href="{{ url_for('static', filename = 'css/index.css')}}"/>
+            <link rel="stylesheet" type= "text/css" href="{{ url_for('static', filename = 'css/page.css')}}"/>
+            <link rel="icon" type="image/jpg" href="{{ url_for('static', filename = 'image/twice new.jpg')}}" > 
+            <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+            <!--link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}"-->
+            <title> TWICE NEW </title>
+            <link href="https://fonts.googleapis.com/css2?family=Mulish&family=Poppins&display=swap" rel="stylesheet">
+            <meta name = "description" content = "Looks so good they would think it's new">
+            <meta name="keywords" content="thrift,online store,store,marketplace,fashion,fashion store">
+            <script type="text/javascript" src="{{ url_for('static', filename = 'js/validateForm.js') }}"></script>
+        </head>
+        <body>
+            <div class="signin-section">
+                <div>
+                    <img id="signin-logo" src= "{{ url_for('static', filename='image/Skill Up With Kahdsole Logo 1.png') }}" />
+                </div>
+                <div class="hr"></div>
+                <div class="on-board-title-link">
+                    <a href="/create/vendor"><div class="on-board-title-link-active">
+                        <div class="on-board-active-link-text">Register</div>
+                        <div class="on-board-active-link-border"></div>
+                    </div></a>
+                    <a href="/login/vendor"><div class="on-board-title-link-inactive">
+                        <div class="on-board-inactive-link-text">Sign  in</div>
+                        <div class="on-board-inactive-link-border"></div>
+                    </div></a>
+                </div>
+                <div class="on-board-form">   
+                    <p> {{msg}} </p>
+                    <form action="/create/vendor" method="POST">
+                        <div class="on-board-form-2">
+                            <input class="on-board-form-input" type="text" name="firstname" placeholder="First name" required>
+                            <input class="on-board-form-input" type="text" name="lastname" placeholder="Last name" required>
+                            <input class="on-board-form-input" type="text" name="email" placeholder="example@email.com" required>
+                            <input class="on-board-form-input" type="password" name="password" placeholder="Password" required>
+                            <input type="text" name="city" placeholder="city" required>
+                            <input type="text" name="state" placeholder="state" required>
+                            <input type="text" name="country" placeholder="country" required>
+                            <input type="text" name="phone" placeholder="phone" required>
+                        </div>
+    
+                        <input type="submit" class="signin-btn" value="Create account">
+                        
+                       
+                    </form>
+                    
+                    <div class="disclaimer">By creating an account, you agree to the <a href="" class="blue">TwiceNew.com</a><a href="" class="blue"> Free Membership Agreement</a> and <a href="" class="blue">Privacy Policy</a></div>
+                </div>
+            </div>
+
+            
+
+        </body>
+    </html>
