@@ -1,13 +1,13 @@
 # Copyright 2015 Google Inc. All Rights Reserved.
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version 2.0 (the 'License');
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
 #     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
+# distributed under the License is distributed on an 'AS IS' BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
@@ -93,7 +93,7 @@ def createUser():
                 'phone' : phone
                     }
                 )
-            msg = "Registration Complete. Please Login to your account !"
+            msg = 'Registration Complete. Please Login to your account !'
             
             return render_template('sign_in.html', msg=msg)
         else:
@@ -116,7 +116,7 @@ def createUser():
                 'phone' : phone
                     }
                 )
-                msg = "Registration Complete. Please Login to your account !"
+                msg = 'Registration Complete. Please Login to your account !'
             
                 return render_template('sign_in.html', msg=msg)
             elif response['Count'] > 0: 
@@ -136,7 +136,7 @@ def createUser():
                 'phone' : phone
                     }
                 )
-                    msg = "Registration Complete. Please Login to your account !"
+                    msg = 'Registration Complete. Please Login to your account !'
             
                     return render_template('sign_in.html', msg=msg)
                 else:
@@ -162,13 +162,13 @@ def loginUser():
         if response['Count']> 0:
             response = response['Items'][0]
         else:
-            return render_template("sign_in.html", msg = 'Invalid Email / Password')
+            return render_template('sign_in.html', msg = 'Invalid Email / Password')
         if password == response['password']:
             session['email'] = email
             return redirect(url_for('index'))
         else:
-            return render_template("sign_in.html", msg = 'Invalid Email / Password')
-    return render_template("sign_in.html")
+            return render_template('sign_in.html', msg = 'Invalid Email / Password')
+    return render_template('sign_in.html')
 
 @app.route('/update/user', methods=['POST','GET'])
 def updateUser():
@@ -200,7 +200,7 @@ def updateUser():
             'phone' : phone
                 }
             )
-        msg = "Your profile has been updated"
+        msg = 'Your profile has been updated'
         
         return redirect(url_for('index'))
     
@@ -267,7 +267,7 @@ def createVendor():
             'phone' : phone
                 }
             )
-            msg = "Registration Complete. Please Login to your account !"
+            msg = 'Registration Complete. Please Login to your account !'
         
             return render_template('admin_login.html', msg=msg)
         elif response['Count'] > 0:
@@ -285,7 +285,7 @@ def createVendor():
                 'phone' : phone
                     }
                 )
-                msg = "Registration Complete. Please Login to your account !"
+                msg = 'Registration Complete. Please Login to your account !'
             
                 return render_template('admin_login.html', msg=msg)
             else:
@@ -311,14 +311,14 @@ def loginVendor():
         if response['Count']> 0:
             response = response['Items'][0]
         else:
-            return render_template("admin_login.html", msg = 'Invalid Email / Password')
+            return render_template('admin_login.html', msg = 'Invalid Email / Password')
         
         if password == response['password']:
             session['email'] = email
             return redirect(url_for('admin'))
         else:
-            return render_template("admin_login.html", msg = 'Invalid Email / Password')
-    return render_template("admin_login.html")
+            return render_template('admin_login.html', msg = 'Invalid Email / Password')
+    return render_template('admin_login.html')
 
 @app.route('/update/vendor', methods=['POST','GET'])
 def updateVendor():
@@ -346,7 +346,7 @@ def updateVendor():
             'phone' : phone
                 }
             )
-        msg = "Your profile has been updated"
+        msg = 'Your profile has been updated'
         
         return redirect(url_for('admin'))
     
@@ -378,7 +378,7 @@ def logoutVendor():
     session.pop('email')
     return redirect(url_for('index'))
 
-@app.route("/<string:collectiontitle>/<string:categorytitle>/<string:producttitle>", methods=['GET'])
+@app.route('/<string:collectiontitle>/<string:categorytitle>/<string:producttitle>', methods=['GET'])
 def productPage(collectiontitle,categorytitle,producttitle):
     loggedIn, username, noOfItems = getLoginDetails()
     producttable = dynamodb.Table('products')
@@ -397,7 +397,7 @@ def productPage(collectiontitle,categorytitle,producttitle):
     wishitem = wishlistresponse['Items']
     return render_template('product.html',item=item,vendor=vendor,loggedIn=loggedIn,username=username,noOfItems=noOfItems,wishitem=wishitem,collection=collectiontitle,category=categorytitle)
 
-@app.route("/<string:collectiontitle>")
+@app.route('/<string:collectiontitle>')
 def collectionPage(collectiontitle):
     loggedIn, username, noOfItems = getLoginDetails()
     producttable = dynamodb.Table('categories')
@@ -407,7 +407,7 @@ def collectionPage(collectiontitle):
     print(item)
     return render_template('collection.html',item=item,loggedIn=loggedIn,username=username,noOfItems=noOfItems,collection=collectiontitle)
 
-@app.route("/<string:collectiontitle>/<string:categorytitle>")
+@app.route('/<string:collectiontitle>/<string:categorytitle>')
 def categoryPage(collectiontitle,categorytitle):
     loggedIn, username, noOfItems = getLoginDetails()
     producttable = dynamodb.Table('products')
@@ -443,16 +443,16 @@ def createProduct():
         description = request.form['description']
 
         image = request.files['image']
-        uploaded_file_extension = image.filename.split(".")[1]
+        uploaded_file_extension = image.filename.split('.')[1]
         if (uploaded_file_extension.lower() in ALLOWED_EXTENSIONS):
-            destination_path = f"static/uploads/{image.filename}"
+            destination_path = f'static/uploads/{image.filename}'
             image.save(destination_path)
 
         try:
             model_src = request.files['model_src']
-            uploaded_file_extension = model_src.filename.split(".")[1]
+            uploaded_file_extension = model_src.filename.split('.')[1]
             if (uploaded_file_extension.lower() in ALLOWED_ASSET_EXTENSIONS):
-                model_destination_path = f"static/assets/{model_src.filename}"
+                model_destination_path = f'static/assets/{model_src.filename}'
                 model_src.save(model_destination_path)
                 model_src = model_src.filename
         except:
@@ -460,9 +460,9 @@ def createProduct():
 
         try:
             model_ios_src = request.files['model_ios_src']
-            uploaded_file_extension = model_ios_src.filename.split(".")[1]
+            uploaded_file_extension = model_ios_src.filename.split('.')[1]
             if (uploaded_file_extension.lower() in ALLOWED_ASSET_EXTENSIONS):
-                ios_destination_path = f"static/assets/{model_ios_src.filename}"
+                ios_destination_path = f'static/assets/{model_ios_src.filename}'
                 model_ios_src.save(ios_destination_path)
                 model_ios_src = model_ios_src.filename
         except:
@@ -488,7 +488,7 @@ def createProduct():
             'categorytitle':categorytitle
                 }
             )
-        msg = "Product  has been added"
+        msg = 'Product  has been added'
         
         return redirect(url_for('admin'))
 
@@ -501,7 +501,7 @@ def createProduct():
     #print(collection_item)
     return render_template('add_product.html',loggedIn=loggedIn,username=username,category_item=category_item,collection_item=collection_item)
 
-@app.route("/update/product/<string:producttitle>", methods=['POST','GET'])
+@app.route('/update/product/<string:producttitle>', methods=['POST','GET'])
 def updateProduct(producttitle):
     loggedIn, username = getAdminLoginDetails()
     producttable = dynamodb.Table('products')
@@ -514,21 +514,21 @@ def updateProduct(producttitle):
         description = request.form['description']
 
         image = request.files['image']
-        uploaded_file_extension = image.filename.split(".")[1]
+        uploaded_file_extension = image.filename.split('.')[1]
         if (uploaded_file_extension.lower() in ALLOWED_EXTENSIONS):
-            destination_path = f"static/uploads/{image.filename}"
+            destination_path = f'static/uploads/{image.filename}'
             image.save(destination_path)
 
         model_src = request.files['model_src']
-        uploaded_file_extension = model_src.filename.split(".")[1]
+        uploaded_file_extension = model_src.filename.split('.')[1]
         if (uploaded_file_extension.lower() in ALLOWED_ASSET_EXTENSIONS):
-            model_destination_path = f"static/assets/{model_src.filename}"
+            model_destination_path = f'static/assets/{model_src.filename}'
             model_src.save(model_destination_path)
 
         model_ios_src = request.files['model_ios_src']
-        uploaded_file_extension = model_ios_src.filename.split(".")[1]
+        uploaded_file_extension = model_ios_src.filename.split('.')[1]
         if (uploaded_file_extension.lower() in ALLOWED_ASSET_EXTENSIONS):
-            ios_destination_path = f"static/assets/{model_ios_src.filename}"
+            ios_destination_path = f'static/assets/{model_ios_src.filename}'
             model_ios_src.save(ios_destination_path)
 
         size = list(request.form['size'])
@@ -551,7 +551,7 @@ def updateProduct(producttitle):
             'categorytitle':categorytitle
                 }
             )
-        msg = "Product  has been updated"
+        msg = 'Product  has been updated'
         
         return redirect(url_for('admin'))
 
@@ -585,21 +585,21 @@ def createCategory():
         description = request.form['description']
 
         image = request.files['image']
-        uploaded_file_extension = image.filename.split(".")[1]
+        uploaded_file_extension = image.filename.split('.')[1]
         if (uploaded_file_extension.lower() in ALLOWED_EXTENSIONS):
-            destination_path = f"static/uploads/{image.filename}"
+            destination_path = f'static/uploads/{image.filename}'
             image.save(destination_path)
 
         model_src = request.files['model_src']
-        uploaded_file_extension = model_src.filename.split(".")[1]
+        uploaded_file_extension = model_src.filename.split('.')[1]
         if (uploaded_file_extension.lower() in ALLOWED_ASSET_EXTENSIONS):
-            model_destination_path = f"static/assets/{model_src.filename}"
+            model_destination_path = f'static/assets/{model_src.filename}'
             model_src.save(model_destination_path)
 
         model_ios_src = request.files['model_ios_src']
-        uploaded_file_extension = model_ios_src.filename.split(".")[1]
+        uploaded_file_extension = model_ios_src.filename.split('.')[1]
         if (uploaded_file_extension.lower() in ALLOWED_ASSET_EXTENSIONS):
-            ios_destination_path = f"static/assets/{model_ios_src.filename}"
+            ios_destination_path = f'static/assets/{model_ios_src.filename}'
             model_ios_src.save(ios_destination_path)
 
         size = list(request.form['size'])
@@ -617,7 +617,7 @@ def createCategory():
             'collectiontitle':collectiontitle
                 }
             )
-        msg = "Category has been added"
+        msg = 'Category has been added'
         
         return redirect(url_for('admin'))
 
@@ -636,21 +636,21 @@ def editCategory(categorytitle):
         description = request.form['description']
 
         image = request.files['image']
-        uploaded_file_extension = image.filename.split(".")[1]
+        uploaded_file_extension = image.filename.split('.')[1]
         if (uploaded_file_extension.lower() in ALLOWED_EXTENSIONS):
-            destination_path = f"static/uploads/{image.filename}"
+            destination_path = f'static/uploads/{image.filename}'
             image.save(destination_path)
 
         model_src = request.files['model_src']
-        uploaded_file_extension = model_src.filename.split(".")[1]
+        uploaded_file_extension = model_src.filename.split('.')[1]
         if (uploaded_file_extension.lower() in ALLOWED_ASSET_EXTENSIONS):
-            model_destination_path = f"static/assets/{model_src.filename}"
+            model_destination_path = f'static/assets/{model_src.filename}'
             model_src.save(model_destination_path)
 
         model_ios_src = request.files['model_ios_src']
-        uploaded_file_extension = model_ios_src.filename.split(".")[1]
+        uploaded_file_extension = model_ios_src.filename.split('.')[1]
         if (uploaded_file_extension.lower() in ALLOWED_ASSET_EXTENSIONS):
-            ios_destination_path = f"static/assets/{model_ios_src.filename}"
+            ios_destination_path = f'static/assets/{model_ios_src.filename}'
             model_ios_src.save(ios_destination_path)
 
         size = list(request.form['size'])
@@ -668,7 +668,7 @@ def editCategory(categorytitle):
             'collectiontitle':collectiontitle
                 }
             )
-        msg = "Category  has been updated"
+        msg = 'Category  has been updated'
         
         return redirect(url_for('admin'))
 
@@ -702,21 +702,21 @@ def createCollection():
         description = request.form['description']
 
         image = request.files['image']
-        uploaded_file_extension = image.filename.split(".")[1]
+        uploaded_file_extension = image.filename.split('.')[1]
         if (uploaded_file_extension.lower() in ALLOWED_EXTENSIONS):
-            destination_path = f"static/uploads/{image.filename}"
+            destination_path = f'static/uploads/{image.filename}'
             image.save(destination_path)
 
         model_src = request.files['model_src']
-        uploaded_file_extension = model_src.filename.split(".")[1]
+        uploaded_file_extension = model_src.filename.split('.')[1]
         if (uploaded_file_extension.lower() in ALLOWED_ASSET_EXTENSIONS):
-            model_destination_path = f"static/assets/{model_src.filename}"
+            model_destination_path = f'static/assets/{model_src.filename}'
             model_src.save(model_destination_path)
 
         model_ios_src = request.files['model_ios_src']
-        uploaded_file_extension = model_ios_src.filename.split(".")[1]
+        uploaded_file_extension = model_ios_src.filename.split('.')[1]
         if (uploaded_file_extension.lower() in ALLOWED_ASSET_EXTENSIONS):
-            ios_destination_path = f"static/assets/{model_ios_src.filename}"
+            ios_destination_path = f'static/assets/{model_ios_src.filename}'
             model_ios_src.save(ios_destination_path)
         
 
@@ -729,7 +729,7 @@ def createCollection():
             'model_ios_src' : model_ios_src.filename
                 }
             )
-        msg = "Collection has been added"
+        msg = 'Collection has been added'
         
         return redirect(url_for('admin'))
 
@@ -746,21 +746,21 @@ def editCollection(collectiontitle):
         description = request.form['description']
 
         image = request.files['image']
-        uploaded_file_extension = image.filename.split(".")[1]
+        uploaded_file_extension = image.filename.split('.')[1]
         if (uploaded_file_extension.lower() in ALLOWED_EXTENSIONS):
-            destination_path = f"static/uploads/{image.filename}"
+            destination_path = f'static/uploads/{image.filename}'
             image.save(destination_path)
 
         model_src = request.files['model_src']
-        uploaded_file_extension = model_src.filename.split(".")[1]
+        uploaded_file_extension = model_src.filename.split('.')[1]
         if (uploaded_file_extension.lower() in ALLOWED_ASSET_EXTENSIONS):
-            model_destination_path = f"static/assets/{model_src.filename}"
+            model_destination_path = f'static/assets/{model_src.filename}'
             model_src.save(model_destination_path)
 
         model_ios_src = request.files['model_ios_src']
-        uploaded_file_extension = model_ios_src.filename.split(".")[1]
+        uploaded_file_extension = model_ios_src.filename.split('.')[1]
         if (uploaded_file_extension.lower() in ALLOWED_ASSET_EXTENSIONS):
-            ios_destination_path = f"static/assets/{model_ios_src.filename}"
+            ios_destination_path = f'static/assets/{model_ios_src.filename}'
             model_ios_src.save(ios_destination_path)
 
       
@@ -776,7 +776,7 @@ def editCollection(collectiontitle):
 
                 }
             )
-        msg = "Collection  has been updated"
+        msg = 'Collection  has been updated'
         
         return redirect(url_for('admin'))
 
@@ -862,7 +862,7 @@ def addCart():
                     }
             )
 
-            msg = "Added item to cart"
+            msg = 'Added item to cart'
             
             return redirect(url_for('index'))
     else:
@@ -924,14 +924,14 @@ def deleteCart(cartid):
 
     return redirect(url_for('index'))
 
-@app.route("/payment/page")
+@app.route('/payment/page')
 def paymentPage():
     if 'email' in session:
         return render_template('confirmation_successful.html')
     else:
         redirect(url_for('index'))
 
-@app.route("/confirmation/successful")
+@app.route('/confirmation/successful')
 def createOrder():
     ordertable = dynamodb.Table('orders')
     carttable = dynamodb.Table('carts')
@@ -981,7 +981,7 @@ def createOrder():
                 'email': session['email']
             })
 
-        msg = "Successfully created order"
+        msg = 'Successfully created order'
         print(msg)
 
         data = {'email':email,'phone':phone,'reference':reference,'code':keys.PUBLIC_KEY,'amount':amount*100,'username':username}
